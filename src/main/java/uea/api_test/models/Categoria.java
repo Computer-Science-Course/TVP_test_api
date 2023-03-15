@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="tb_categoria")
+@Table(name="categoria")
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

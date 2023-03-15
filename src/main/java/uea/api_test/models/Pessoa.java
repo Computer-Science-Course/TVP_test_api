@@ -8,6 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -17,9 +21,15 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer codigo;
-	
+
+	@NotBlank(message="Nome é obrigatório")
+	@Size(min=3, max=20, message="Nome deve ter tamanho de 3 e 20.")
 	private String nome;
+	
+	@NotNull(message="Nome é obrigatório")
 	private Boolean ativo;
+	
+	@Valid
 	@Embedded
 	private Endereco endereco;
 
