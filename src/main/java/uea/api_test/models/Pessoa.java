@@ -7,31 +7,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tb_categoria")
-public class Categoria implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Pessoa implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long codigo;
+	private Integer codigo;
 	private String nome;
+	private Boolean ativo;
 
-	public Categoria() {}
+	public Pessoa() {
+	}
 
-	public Categoria(Long codigo, String nome) {
+	public Pessoa(Integer codigo, String nome, Boolean ativo) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
+		this.ativo = ativo;
 	}
 
-	public Long getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 
@@ -43,9 +45,17 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		return Objects.hash(ativo, codigo, nome);
 	}
 
 	@Override
@@ -56,8 +66,9 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
-		return Objects.equals(codigo, other.codigo);
+		Pessoa other = (Pessoa) obj;
+		return Objects.equals(ativo, other.ativo) && Objects.equals(codigo, other.codigo)
+				&& Objects.equals(nome, other.nome);
 	}
 
 }
