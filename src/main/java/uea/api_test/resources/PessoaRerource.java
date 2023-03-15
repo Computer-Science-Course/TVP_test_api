@@ -20,7 +20,7 @@ import uea.api_test.services.CategoriaService;
 
 @RestController
 @RequestMapping("/pessoas")
-public class CategoriaRerource {
+public class PessoaRerource {
 	
 	@Autowired
 	private CategoriaService pessoaService;

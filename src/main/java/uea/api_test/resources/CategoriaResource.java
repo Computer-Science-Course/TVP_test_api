@@ -62,7 +62,8 @@ public class CategoriaResource {
     public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
     	categoriaService.excluir(codigo);
     	
-    	return ResponseEntity.noContent()
+    	return ResponseEntity
+    			.noContent()
     			.build();
     }
     
