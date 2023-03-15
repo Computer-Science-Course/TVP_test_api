@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import jakarta.validation.Valid;
 import uea.api_test.models.Categoria;
 import uea.api_test.services.CategoriaService;
 
@@ -26,7 +27,7 @@ public class CategoriaResource {
 	private CategoriaService categoriaService;
 	
 	@PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria) {
         Categoria categoriaSalva = categoriaService.criar(categoria);
         
         URI uri = ServletUriComponentsBuilder
@@ -70,7 +71,7 @@ public class CategoriaResource {
     @PutMapping(value="/{codigo}")
     public ResponseEntity<Categoria> atualizar(
     		@PathVariable Long codigo,
-    		@RequestBody Categoria categoria
+    		@Valid @RequestBody Categoria categoria
     ) {
     	Categoria categoriaSalva = categoriaService.atualizar(codigo, categoria);
     	

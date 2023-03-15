@@ -15,19 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import uea.api_test.models.Categoria;
-import uea.api_test.services.CategoriaService;
+import jakarta.validation.Valid;
+import uea.api_test.models.Pessoa;
+import uea.api_test.services.PessoaService;
 
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaRerource {
 	
 	@Autowired
-	private CategoriaService pessoaService;
+	private PessoaService pessoaService;
 	
 	@PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria pessoa) {
-        Categoria pessoaSalva = pessoaService.criar(pessoa);
+    public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa) {
+        Pessoa pessoaSalva = pessoaService.criar(pessoa);
         
         URI uri = ServletUriComponentsBuilder
         		.fromCurrentRequest()
@@ -41,8 +42,8 @@ public class PessoaRerource {
     }
     
     @GetMapping
-    public ResponseEntity<List<Categoria>> listar(){
-        List<Categoria> pessoas = pessoaService.listar();
+    public ResponseEntity<List<Pessoa>> listar(){
+        List<Pessoa> pessoas = pessoaService.listar();
         
         return ResponseEntity
         		.ok()
@@ -50,8 +51,8 @@ public class PessoaRerource {
     }
     
     @GetMapping(value = "/{codigo}")
-    public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable Long codigo){
-        Categoria pessoa = pessoaService.buscarPorCodigo(codigo);
+    public ResponseEntity<Pessoa> buscarPorCodigo(@PathVariable Long codigo){
+        Pessoa pessoa = pessoaService.buscarPorCodigo(codigo);
         
         return ResponseEntity
         		.ok()
@@ -67,11 +68,11 @@ public class PessoaRerource {
     }
     
     @PutMapping(value="/{codigo}")
-    public ResponseEntity<Categoria> atualizar(
+    public ResponseEntity<Pessoa> atualizar(
     		@PathVariable Long codigo,
-    		@RequestBody Categoria pessoa
+    		@RequestBody Pessoa pessoa
     ) {
-    	Categoria pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+    	Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
     	
     	return ResponseEntity
         		.ok()
