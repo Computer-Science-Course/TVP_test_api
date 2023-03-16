@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import uea.api_test.models.enums.TipoLancamento;
@@ -43,6 +44,7 @@ public class Lancamento implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa")
+	@Valid
 	@NotNull(message = "Pessoa é obrigatório")
 	private Pessoa pessoa;
 

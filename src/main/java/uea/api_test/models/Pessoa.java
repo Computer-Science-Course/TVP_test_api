@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -27,7 +28,8 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	@NotNull(message="Nome é obrigatório")
-	private Boolean ativo;
+	@AssertTrue(message="A pessoa deve estar ativa para salvar ou atualizar.")
+	private boolean ativo;
 	
 	@Valid
 	@Embedded
@@ -60,11 +62,11 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 
-	public Boolean getAtivo() {
+	public boolean getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(Boolean ativo) {
+	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
 

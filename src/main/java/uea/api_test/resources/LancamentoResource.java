@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import jakarta.validation.Valid;
 import uea.api_test.models.Lancamento;
 import uea.api_test.services.LancamentoService;
 
@@ -42,7 +43,7 @@ public class LancamentoResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Lancamento> criar(@RequestBody Lancamento lancamento) {
+	public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento) {
 		Lancamento lancamentoCriado = lancamentoService.criar(lancamento);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
 				.buildAndExpand(lancamentoCriado.getCodigo()).toUri();
@@ -52,7 +53,7 @@ public class LancamentoResource {
 	}
 
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @RequestBody Lancamento lancamento) {
+	public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo,@Valid @RequestBody Lancamento lancamento) {
 		Lancamento lancamentoAtualizado = lancamentoService.atualizar(codigo, lancamento);
 		return ResponseEntity
 				.ok(lancamentoAtualizado);
