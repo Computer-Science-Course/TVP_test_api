@@ -32,18 +32,18 @@ public class Lancamento implements Serializable {
 	@NotNull(message = "Valor é obrigatório")
 	private BigDecimal valor;
 	private String observacao;
-	@NotBlank(message = "Tipo lançamento é obrigatório")
+	@NotNull(message = "Tipo lançamento é obrigatório")
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipoLancamento;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
-	@NotBlank(message = "Categoria é obrigatório")
+	@NotNull(message = "Categoria é obrigatório")
 	private Categoria categoria;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa")
-	@NotBlank(message = "Pessoa é obrigatório")
+	@NotNull(message = "Pessoa é obrigatório")
 	private Pessoa pessoa;
 
 	public Lancamento() {
