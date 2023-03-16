@@ -29,19 +29,15 @@ public class LancamentoResource {
 	private LancamentoService lancamentoService;
 
 	@GetMapping
-	public ResponseEntity<List<Lancamento>> listarLancamentos() {
-		List<Lancamento> lancamentos = lancamentoService.listarLancamentos();
-		return ResponseEntity
-				.ok()
-				.body(lancamentos);
+	public ResponseEntity<List<ResumoLancamentoDto>> resumir(LancamentoFilter lancamentoFilter) {
+		List<ResumoLancamentoDto> resumos = lancamentoService.resumir(lancamentoFilter);
+		return ResponseEntity.ok().body(resumos);
 	}
 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Lancamento> buscarLancamentoPorCodigo(@PathVariable Long codigo) {
 		Lancamento lancamento = lancamentoService.buscarLancamentoPorCodigo(codigo);
-		return ResponseEntity
-				.ok()
-				.body(lancamento);
+		return ResponseEntity.ok().body(lancamento);
 	}
 
 	@PostMapping
@@ -49,27 +45,18 @@ public class LancamentoResource {
 		Lancamento lancamentoCriado = lancamentoService.criar(lancamento);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
 				.buildAndExpand(lancamentoCriado.getCodigo()).toUri();
-		return ResponseEntity
-				.created(uri)
-				.body(lancamentoCriado);
-	}
-	
-	public ResponseEntity<List<ResumoLancamentoDto>> resumir(LancamentoFilter lancamentoFilter) {
-		
+		return ResponseEntity.created(uri).body(lancamentoCriado);
 	}
 
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo,@Valid @RequestBody Lancamento lancamento) {
+	public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento) {
 		Lancamento lancamentoAtualizado = lancamentoService.atualizar(codigo, lancamento);
-		return ResponseEntity
-				.ok(lancamentoAtualizado);
+		return ResponseEntity.ok(lancamentoAtualizado);
 	}
 
 	@DeleteMapping("/{codigo}")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
 		lancamentoService.deletar(codigo);
-		return ResponseEntity
-				.noContent()
-				.build();
+		return ResponseEntity.noContent().build();
 	}
 }
