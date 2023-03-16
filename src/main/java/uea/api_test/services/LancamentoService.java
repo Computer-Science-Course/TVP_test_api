@@ -6,7 +6,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uea.api_test.models.Categoria;
 import uea.api_test.models.Lancamento;
+import uea.api_test.models.Pessoa;
 import uea.api_test.repositories.LancamentoRepository;
 
 @Service
@@ -14,6 +16,12 @@ public class LancamentoService {
 	
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
+	
+	@Autowired
+	private PessoaService pessoaService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 	
     public List<Lancamento> listarLancamentos() {
         return lancamentoRepository.findAll();
@@ -27,6 +35,9 @@ public class LancamentoService {
     }
 
     public Lancamento criar(Lancamento lancamento) {
+    	Pessoa pessoa = pessoaService.buscarPorCodigo(lancamento.getPessoa().getCodigo());
+    	Categoria categoria = categoriaService.buscarPorCodigo(lancamento.getCategoria().getCodigo());
+    	
         return lancamentoRepository.save(lancamento);
     }
 

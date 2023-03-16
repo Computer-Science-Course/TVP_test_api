@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import uea.api_test.models.enums.TipoLancamento;
 
 @Entity
@@ -23,35 +24,33 @@ public class Lancamento implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	@NotBlank(message="Descrição é obrigatório")
+	@NotBlank(message = "Descrição é obrigatório")
 	private String descricao;
-	@NotBlank(message="Data de vencimento é obrigatório")
+	@NotNull(message = "Data de vencimento é obrigatório")
 	private LocalDate dataVencimento;
 	private LocalDate dataPagamento;
-	@NotBlank(message="Valor é obrigatório")
+	@NotNull(message = "Valor é obrigatório")
 	private BigDecimal valor;
 	private String observacao;
-	@NotBlank(message="Tipo lançamento é obrigatório")
+	@NotBlank(message = "Tipo lançamento é obrigatório")
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipoLancamento;
 
 	@ManyToOne
-	@JoinColumn(name="codigo_categoria")
-	@NotBlank(message="Categoria é obrigatório")
+	@JoinColumn(name = "codigo_categoria")
+	@NotBlank(message = "Categoria é obrigatório")
 	private Categoria categoria;
-	
+
 	@ManyToOne
-	@JoinColumn(name="codigo_pessoa")
-	@NotBlank(message="Pessoa é obrigatório")
+	@JoinColumn(name = "codigo_pessoa")
+	@NotBlank(message = "Pessoa é obrigatório")
 	private Pessoa pessoa;
 
 	public Lancamento() {
 	}
 
 	public Lancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
-			BigDecimal valor, String observacao, TipoLancamento tipoLancamento, Categoria categoria,
-			Pessoa pessoa
-	) {
+			BigDecimal valor, String observacao, TipoLancamento tipoLancamento, Categoria categoria, Pessoa pessoa) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.dataVencimento = dataVencimento;
@@ -125,6 +124,14 @@ public class Lancamento implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	@Override

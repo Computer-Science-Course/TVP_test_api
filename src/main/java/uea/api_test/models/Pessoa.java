@@ -20,7 +20,7 @@ public class Pessoa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer codigo;
+	private Long codigo;
 
 	@NotBlank(message="Nome é obrigatório")
 	@Size(min=3, max=20, message="Nome deve ter tamanho de 3 e 20.")
@@ -36,7 +36,7 @@ public class Pessoa implements Serializable {
 	public Pessoa() {
 	}
 
-	public Pessoa(Integer codigo, String nome, Boolean ativo, Endereco endereco) {
+	public Pessoa(Long codigo, String nome, Boolean ativo, Endereco endereco) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -44,11 +44,11 @@ public class Pessoa implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public Integer getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
