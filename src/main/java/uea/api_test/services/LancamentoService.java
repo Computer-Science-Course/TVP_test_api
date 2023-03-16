@@ -6,10 +6,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uea.api_test.dto.ResumoLancamentoDto;
 import uea.api_test.models.Categoria;
 import uea.api_test.models.Lancamento;
 import uea.api_test.models.Pessoa;
 import uea.api_test.repositories.LancamentoRepository;
+import uea.api_test.repositories.filters.LancamentoFilter;
 
 @Service
 public class LancamentoService {
@@ -22,6 +24,10 @@ public class LancamentoService {
 	
 	@Autowired
 	private CategoriaService categoriaService;
+	
+	public List<ResumoLancamentoDto> resumir(LancamentoFilter lancamentoFilter) {
+		return lancamentoRepository.filtrar(lancamentoFilter);
+	}
 	
     public List<Lancamento> listarLancamentos() {
         return lancamentoRepository.findAll();

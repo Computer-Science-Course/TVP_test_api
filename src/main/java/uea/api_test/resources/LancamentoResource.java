@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
+import uea.api_test.dto.ResumoLancamentoDto;
 import uea.api_test.models.Lancamento;
+import uea.api_test.repositories.filters.LancamentoFilter;
 import uea.api_test.services.LancamentoService;
 
 @RestController
@@ -50,6 +52,10 @@ public class LancamentoResource {
 		return ResponseEntity
 				.created(uri)
 				.body(lancamentoCriado);
+	}
+	
+	public ResponseEntity<List<ResumoLancamentoDto>> resumir(LancamentoFilter lancamentoFilter) {
+		
 	}
 
 	@PutMapping("/{codigo}")
