@@ -6,9 +6,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uea.api_test.dto.ResumoPessoaDto;
 import uea.api_test.models.Endereco;
 import uea.api_test.models.Pessoa;
 import uea.api_test.repositories.PessoaRepository;
+import uea.api_test.repositories.filters.PessoaFilter;
 
 @Service
 public class PessoaService {
@@ -18,6 +20,10 @@ public class PessoaService {
 	
 	public List<Pessoa> listar() {
 		return pessoaRepository.findAll();
+	}
+	
+	public List<ResumoPessoaDto> resumir(PessoaFilter lancamentoFilter){
+		return pessoaRepository.filtrar(lancamentoFilter);
 	}
 	
 	public Pessoa criar(Pessoa pessoa) {
