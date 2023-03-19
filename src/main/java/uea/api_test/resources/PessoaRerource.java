@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
+import uea.api_test.models.Endereco;
 import uea.api_test.models.Pessoa;
 import uea.api_test.services.PessoaService;
 
@@ -77,5 +78,14 @@ public class PessoaRerource {
     	return ResponseEntity
         		.ok()
         		.body(pessoaSalva);
+    }
+    
+    @PutMapping(value="/{codigo}/endereco")
+    public ResponseEntity<Pessoa> atualizarEndereco(
+    		@PathVariable Long codigo,
+    		@RequestBody Endereco endereco
+    ) {
+        Pessoa pessoaAtualizada = pessoaService.atualizarEndereco(codigo, endereco);
+        return ResponseEntity.ok(pessoaAtualizada);
     }
 }

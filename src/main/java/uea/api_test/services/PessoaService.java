@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uea.api_test.models.Endereco;
 import uea.api_test.models.Pessoa;
 import uea.api_test.repositories.PessoaRepository;
 
@@ -38,6 +39,22 @@ public class PessoaService {
 				.orElse(pessoa);
 		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");;
 		
+		return pessoaRepository.save(pessoaSalva);
+	}
+
+	public Pessoa atualizarEndereco(Long codigo, Endereco endereco) {
+		Pessoa pessoaSalva = pessoaRepository
+				.findById(codigo)
+				.orElseThrow();
+
+		pessoaSalva.getEndereco().setLogradouro(endereco.getLogradouro());
+		pessoaSalva.getEndereco().setNumero(endereco.getNumero());
+		pessoaSalva.getEndereco().setComplemento(endereco.getComplemento());
+		pessoaSalva.getEndereco().setBairro(endereco.getBairro());
+		pessoaSalva.getEndereco().setCep(endereco.getCep());
+		pessoaSalva.getEndereco().setCidade(endereco.getCidade());
+		pessoaSalva.getEndereco().setEstado(endereco.getEstado());
+
 		return pessoaRepository.save(pessoaSalva);
 	}
 }
