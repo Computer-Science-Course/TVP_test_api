@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import uea.api_test.dto.ResumoPessoaDto;
@@ -22,8 +24,8 @@ public class PessoaService {
 		return pessoaRepository.findAll();
 	}
 	
-	public List<ResumoPessoaDto> resumir(PessoaFilter lancamentoFilter){
-		return pessoaRepository.filtrar(lancamentoFilter);
+	public Page<ResumoPessoaDto> resumir(PessoaFilter lancamentoFilter, Pageable pageable){
+		return pessoaRepository.filtrar(lancamentoFilter, pageable);
 	}
 	
 	public Pessoa criar(Pessoa pessoa) {

@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +42,8 @@ public class PessoaRerource {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ResumoPessoaDto>> resumir(PessoaFilter lancamentoFilter) {
-		List<ResumoPessoaDto> resumos = pessoaService.resumir(lancamentoFilter);
+	public ResponseEntity<Page<ResumoPessoaDto>> resumir(PessoaFilter lancamentoFilter, Pageable pageable) {
+		Page<ResumoPessoaDto> resumos = pessoaService.resumir(lancamentoFilter, pageable);
 		return ResponseEntity.ok().body(resumos);
 	}
 

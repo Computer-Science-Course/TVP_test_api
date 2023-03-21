@@ -35,7 +35,7 @@ public class Lancamento implements Serializable {
 	private String observacao;
 	@NotNull(message = "Tipo lançamento é obrigatório")
 	@Enumerated(EnumType.STRING)
-	private TipoLancamento tipoLancamento;
+	private TipoLancamento tipo;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
@@ -52,14 +52,14 @@ public class Lancamento implements Serializable {
 	}
 
 	public Lancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
-			BigDecimal valor, String observacao, TipoLancamento tipoLancamento, Categoria categoria, Pessoa pessoa) {
+			BigDecimal valor, String observacao, TipoLancamento tipo, Categoria categoria, Pessoa pessoa) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.dataVencimento = dataVencimento;
 		this.dataPagamento = dataPagamento;
 		this.valor = valor;
 		this.observacao = observacao;
-		this.tipoLancamento = tipoLancamento;
+		this.tipo = tipo;
 		this.categoria = categoria;
 		this.pessoa = pessoa;
 	}
@@ -89,7 +89,7 @@ public class Lancamento implements Serializable {
 	}
 
 	public TipoLancamento getTipoLancamento() {
-		return tipoLancamento;
+		return tipo;
 	}
 
 	public void setCodigo(Long codigo) {
@@ -116,8 +116,8 @@ public class Lancamento implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public void setTipoLancamento(TipoLancamento tipoLancamento) {
-		this.tipoLancamento = tipoLancamento;
+	public void setTipoLancamento(TipoLancamento tipo) {
+		this.tipo = tipo;
 	}
 
 	public Categoria getCategoria() {
